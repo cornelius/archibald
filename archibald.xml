@@ -217,4 +217,109 @@
       <line destination="5" style="0"/>
     </block>
   </diagram>
+  <diagram title="Kolab">
+    <block>
+      <title>Storage</title>
+      <ring>3</ring>
+      <startangle>0</startangle>
+      <endangle>359</endangle>
+      <color>#0085d6</color>
+      <hidetext>false</hidetext>
+      <pie>false</pie>
+      <circle>true</circle>
+    </block>
+    <block>
+      <title>Storage Access Protocol</title>
+      <ring>4</ring>
+      <startangle>0</startangle>
+      <endangle>359</endangle>
+      <color>#fec506</color>
+      <hidetext>false</hidetext>
+      <pie>false</pie>
+      <circle>true</circle>
+    </block>
+    <block>
+      <title>KDE API</title>
+      <ring>5</ring>
+      <startangle>70</startangle>
+      <endangle>290</endangle>
+      <color>#0bb428</color>
+      <hidetext>false</hidetext>
+      <pie>false</pie>
+      <circle>false</circle>
+    </block>
+    <block>
+      <title>Kontact</title>
+      <ring>6</ring>
+      <startangle>100</startangle>
+      <endangle>130</endangle>
+      <color>#bc1af4</color>
+      <hidetext>false</hidetext>
+      <pie>false</pie>
+      <circle>false</circle>
+      <line destination="5" style="0"/>
+    </block>
+    <block>
+      <title>IMAP</title>
+      <ring>6</ring>
+      <startangle>145</startangle>
+      <endangle>255</endangle>
+      <color>#e21429</color>
+      <hidetext>false</hidetext>
+      <pie>false</pie>
+      <circle>false</circle>
+      <line destination="5" style="0"/>
+      <secondaryline destination="2" from="5" style="2"/>
+    </block>
+    <block>
+      <title>Store IMAP</title>
+      <ring>2</ring>
+      <startangle>145</startangle>
+      <endangle>255</endangle>
+      <color>#0085f4</color>
+      <hidetext>true</hidetext>
+      <pie>true</pie>
+      <circle>false</circle>
+    </block>
+    <block>
+      <title>Kolab Server</title>
+      <ring>8</ring>
+      <startangle>145</startangle>
+      <endangle>255</endangle>
+      <color>#e21429</color>
+      <hidetext>false</hidetext>
+      <pie>false</pie>
+      <circle>false</circle>
+    </block>
+    <block>
+      <title>Email</title>
+      <ring>7</ring>
+      <startangle>145</startangle>
+      <endangle>175</endangle>
+      <color>#e21429</color>
+      <hidetext>false</hidetext>
+      <pie>false</pie>
+      <circle>false</circle>
+    </block>
+    <block>
+      <title>Contacts</title>
+      <ring>7</ring>
+      <startangle>185</startangle>
+      <endangle>215</endangle>
+      <color>#e21429</color>
+      <hidetext>false</hidetext>
+      <pie>false</pie>
+      <circle>false</circle>
+    </block>
+    <block>
+      <title>Calendar</title>
+      <ring>7</ring>
+      <startangle>225</startangle>
+      <endangle>255</endangle>
+      <color>#e21429</color>
+      <hidetext>false</hidetext>
+      <pie>false</pie>
+      <circle>false</circle>
+    </block>
+  </diagram>
 </archibald>

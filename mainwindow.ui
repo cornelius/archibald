@@ -536,6 +536,13 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="mSelectDiagramButton">
+        <property name="text">
+         <string>Select</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="mAddDiagramButton">
         <property name="text">
          <string>+</string>

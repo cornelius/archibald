@@ -27,9 +27,13 @@ class MainWindow : public QMainWindow, private Ui_MainWindow
     void setColor( const QColor & );
     QColor blockColor() const;
 
+    void showDiagram( BlockStore * );
+
   protected slots:
     void addBlock();
     void saveBlockEditor();
+    void addDiagram();
+    void selectDiagram();
 
     void slotCurrentChanged( const QModelIndex &current,
       const QModelIndex &previous );

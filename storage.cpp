@@ -139,7 +139,7 @@ void Storage::save( const QString &filename )
     ts << "<archibald>\n";
     foreach( BlockStore *blockStore, mModel->blockStores() ) {
       ts << "  <diagram title=\"" << blockStore->title() << "\">\n";
-      Block::List blocks = mModel->blockStore()->blocks();
+      Block::List blocks = blockStore->blocks();
       foreach( Block *b, blocks ) {
         ts << "    <block>\n";
         ts << "      <title>" + Q3StyleSheet::escape( b->title() ) + "</title>\n";

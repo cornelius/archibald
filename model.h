@@ -34,8 +34,11 @@ class Model
 
     QList<BlockStore *> blockStores() const;
 
+    void setCurrent( BlockStore * );
+
   private:
     QList<BlockStore *> mBlockStores;
+    BlockStore *mCurrent;
 };
 
 #endif

@@ -7,6 +7,7 @@
 
 #include <QtDebug>
 #include <QColorDialog>
+#include <QInputDialog>
 
 MainWindow::MainWindow()
   : mLoading( false )
@@ -14,11 +15,13 @@ MainWindow::MainWindow()
   setupUi( this );
   
   connect( mActionQuit, SIGNAL( triggered() ), SLOT( close() ) );
-
   connect( mCloseButton, SIGNAL( clicked() ), SLOT( close() ) );
 
-  menuBar()->hide();
+//  menuBar()->hide();
   statusBar()->hide();
+
+  connect( mAddDiagramButton, SIGNAL( clicked() ), SLOT( addDiagram() ) );
+  connect( mSelectDiagramButton, SIGNAL( clicked() ), SLOT( selectDiagram() ) );
 
   connect( mStartAngleSpin, SIGNAL( valueChanged( int ) ),
     mStartAngleDial, SLOT( setValue( int ) ) );
@@ -37,16 +40,7 @@ MainWindow::MainWindow()
 
   load();
 
-  mBlockListView->setModel( mModel.blockStore() );
-  mView->setModel( mModel.blockStore() );
-
-  connect( mBlockListView->selectionModel(),
-    SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ),
-    SLOT( slotCurrentChanged( const QModelIndex &, const QModelIndex & ) ) );
-
-  mBlockListView->selectionModel()->setCurrentIndex(
-    mModel.blockStore()->index( 0 ),
-    QItemSelectionModel::SelectCurrent );
+  showDiagram( mModel.blockStore() );
 
   connect( mTitleEdit, SIGNAL( textEdited( const QString & ) ),
     SLOT( saveBlockEditor() ) );
@@ -225,8 +219,24 @@ void MainWindow::load()
 {
   Storage s( &mModel );
   s.load( defaultFilename() );
+}
 
-  mDiagramLabel->setText( mModel.blockStore()->title() );
+void MainWindow::showDiagram( BlockStore *blockStore )
+{
+  mModel.setCurrent( blockStore );
+
+  mDiagramLabel->setText( mModel.blockStore()->title() );  
+
+  mBlockListView->setModel( mModel.blockStore() );
+  mView->setModel( mModel.blockStore() );
+
+  connect( mBlockListView->selectionModel(),
+    SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ),
+    SLOT( slotCurrentChanged( const QModelIndex &, const QModelIndex & ) ) );
+
+  mBlockListView->selectionModel()->setCurrentIndex(
+    mModel.blockStore()->index( 0 ),
+    QItemSelectionModel::SelectCurrent );
 }
 
 QString MainWindow::defaultFilename() const
@@ -252,4 +262,38 @@ void MainWindow::setColor( const QColor &color )
 QColor MainWindow::blockColor() const
 {
   return mColorFrame->palette().color( QPalette::Window );
+}
+
+void MainWindow::addDiagram()
+{
+  QString title = QInputDialog::getText( this, "New Diagram",
+    "Enter title of new diagram" );
+
+  if ( title.isEmpty() ) return;
+
+  BlockStore *blockStore = new BlockStore;
+  blockStore->setTitle( title );
+
+  mModel.addBlockStore( blockStore );
+
+  showDiagram( blockStore );
+
+  addBlock();
+}
+
+void MainWindow::selectDiagram()
+{
+  QStringList titles;
+  foreach( BlockStore *b, mModel.blockStores() ) {
+    titles.append( b->title() );
+  }
+  QString title = QInputDialog::getItem( this, "Select Diagram",
+    "Select diagram to show", titles );
+    
+  foreach( BlockStore *b, mModel.blockStores() ) {
+    if ( b->title() == title ) {
+      showDiagram( b );
+      break;
+    }
+  }
 }

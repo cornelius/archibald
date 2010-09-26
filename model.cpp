@@ -20,6 +20,7 @@
 #include "model.h"
 
 Model::Model()
+  : mCurrent( 0 )
 {
 }
 
@@ -35,5 +36,11 @@ QList<BlockStore *> Model::blockStores() const
 
 BlockStore *Model::blockStore() const
 {
-  return mBlockStores.first();
+  if ( !mCurrent ) return mBlockStores.first();
+  else return mCurrent;
+}
+
+void Model::setCurrent( BlockStore *blockStore )
+{
+  mCurrent = blockStore;
 }
