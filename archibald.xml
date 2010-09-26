@@ -1,0 +1,218 @@
+<archibald>
+  <block>
+    <title>Storage</title>
+    <ring>3</ring>
+    <startangle>0</startangle>
+    <endangle>359</endangle>
+    <color>#0085d6</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>true</circle>
+  </block>
+  <block>
+    <title>Storage Access Protocol</title>
+    <ring>4</ring>
+    <startangle>0</startangle>
+    <endangle>359</endangle>
+    <color>#fec506</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>true</circle>
+  </block>
+  <block>
+    <title>KDE API</title>
+    <ring>5</ring>
+    <startangle>96</startangle>
+    <endangle>344</endangle>
+    <color>#0bb428</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+  </block>
+  <block>
+    <title>GNOME API</title>
+    <ring>5</ring>
+    <startangle>20</startangle>
+    <endangle>74</endangle>
+    <color>#0bb428</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+  </block>
+  <block>
+    <title>Kontact</title>
+    <ring>6</ring>
+    <startangle>180</startangle>
+    <endangle>205</endangle>
+    <color>#bc1af4</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+  </block>
+  <block>
+    <title>KOffice</title>
+    <ring>6</ring>
+    <startangle>210</startangle>
+    <endangle>232</endangle>
+    <color>#bc1af4</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+  </block>
+  <block>
+    <title>iCalendar File</title>
+    <ring>6</ring>
+    <startangle>235</startangle>
+    <endangle>275</endangle>
+    <color>#e21429</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+    <secondaryline destination="2" from="5" style="2"/>
+  </block>
+  <block>
+    <title>OX</title>
+    <ring>6</ring>
+    <startangle>278</startangle>
+    <endangle>290</endangle>
+    <color>#e21429</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+    <secondaryline destination="2" from="5" style="2"/>
+  </block>
+  <block>
+    <title>GroupWise</title>
+    <ring>6</ring>
+    <startangle>293</startangle>
+    <endangle>329</endangle>
+    <color>#e21429</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+    <secondaryline destination="2" from="5" style="2"/>
+  </block>
+  <block>
+    <title>POP</title>
+    <ring>6</ring>
+    <startangle>96</startangle>
+    <endangle>114</endangle>
+    <color>#e21429</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+    <secondaryline destination="2" from="5" style="2"/>
+  </block>
+  <block>
+    <title>IMAP</title>
+    <ring>6</ring>
+    <startangle>127</startangle>
+    <endangle>146</endangle>
+    <color>#e21429</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+    <secondaryline destination="2" from="5" style="2"/>
+  </block>
+  <block>
+    <title>EDS</title>
+    <ring>6</ring>
+    <startangle>56</startangle>
+    <endangle>74</endangle>
+    <color>#e21429</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+    <secondaryline destination="2" from="5" style="2"/>
+  </block>
+  <block>
+    <title>Evolution</title>
+    <ring>6</ring>
+    <startangle>20</startangle>
+    <endangle>50</endangle>
+    <color>#bc1af4</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+  </block>
+  <block>
+    <title>Store iCalendar</title>
+    <ring>2</ring>
+    <startangle>242</startangle>
+    <endangle>265</endangle>
+    <color>#0085f4</color>
+    <hidetext>true</hidetext>
+    <pie>true</pie>
+    <circle>false</circle>
+  </block>
+  <block>
+    <title>Store OX</title>
+    <ring>2</ring>
+    <startangle>272</startangle>
+    <endangle>293</endangle>
+    <color>#0085f4</color>
+    <hidetext>true</hidetext>
+    <pie>true</pie>
+    <circle>false</circle>
+  </block>
+  <block>
+    <title>Store GroupWise</title>
+    <ring>2</ring>
+    <startangle>299</startangle>
+    <endangle>323</endangle>
+    <color>#0085f4</color>
+    <hidetext>true</hidetext>
+    <pie>true</pie>
+    <circle>false</circle>
+  </block>
+  <block>
+    <title>Store POP</title>
+    <ring>2</ring>
+    <startangle>95</startangle>
+    <endangle>117</endangle>
+    <color>#0085f4</color>
+    <hidetext>true</hidetext>
+    <pie>true</pie>
+    <circle>false</circle>
+  </block>
+  <block>
+    <title>Store IMAP</title>
+    <ring>2</ring>
+    <startangle>125</startangle>
+    <endangle>148</endangle>
+    <color>#0085f4</color>
+    <hidetext>true</hidetext>
+    <pie>true</pie>
+    <circle>false</circle>
+  </block>
+  <block>
+    <title>Store EDS</title>
+    <ring>2</ring>
+    <startangle>51</startangle>
+    <endangle>75</endangle>
+    <color>#0085f4</color>
+    <hidetext>true</hidetext>
+    <pie>true</pie>
+    <circle>false</circle>
+  </block>
+  <block>
+    <title>...</title>
+    <ring>6</ring>
+    <startangle>336</startangle>
+    <endangle>344</endangle>
+    <color>#ff0000</color>
+    <hidetext>false</hidetext>
+    <pie>false</pie>
+    <circle>false</circle>
+    <line destination="5" style="0"/>
+  </block>
+</archibald>
