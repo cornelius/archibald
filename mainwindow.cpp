@@ -15,6 +15,11 @@ MainWindow::MainWindow()
   
   connect( mActionQuit, SIGNAL( triggered() ), SLOT( close() ) );
 
+  connect( mCloseButton, SIGNAL( clicked() ), SLOT( close() ) );
+
+  menuBar()->hide();
+  statusBar()->hide();
+
   connect( mStartAngleSpin, SIGNAL( valueChanged( int ) ),
     mStartAngleDial, SLOT( setValue( int ) ) );
   connect( mStartAngleDial, SIGNAL( valueChanged( int ) ),
