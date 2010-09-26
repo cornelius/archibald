@@ -11,7 +11,7 @@ INCLUDEPATH += .
 HEADERS += mainwindow.h ringwidget.h
 FORMS += mainwindow.ui
 SOURCES += main.cpp mainwindow.cpp ringwidget.cpp blockstore.cpp block.cpp \
-  storage.cpp prefs.cpp line.cpp
+  storage.cpp prefs.cpp line.cpp model.cpp
 
 QT += xml
 QT += qt3support

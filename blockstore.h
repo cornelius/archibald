@@ -31,6 +31,9 @@ class BlockStore : public QAbstractListModel
     BlockStore( QObject *parent = 0 );
     ~BlockStore();
 
+    void setTitle( const QString &title );
+    QString title() const;
+
     void clear();
 
     Block::List blocks() const;
@@ -46,6 +49,7 @@ class BlockStore : public QAbstractListModel
       int role = Qt::DisplayRole ) const;
 
   private:
+    QString mTitle;
     Block::List mBlocks;
 };
 

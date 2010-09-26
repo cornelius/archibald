@@ -3,6 +3,7 @@
 #include "ringwidget.h"
 #include "storage.h"
 #include "prefs.h"
+#include "blockstore.h"
 
 #include <QtDebug>
 #include <QColorDialog>
@@ -27,18 +28,19 @@ MainWindow::MainWindow()
   connect( mRingViewButton, SIGNAL( clicked() ),
     SLOT( showRingView() ) );
 
-  mBlockListView->setModel( &mBlockStore );
-  mView->setModel( &mBlockStore );
-
   connect( mAddBlockButton, SIGNAL( clicked() ), SLOT( addBlock() ) );
+
+  load();
+
+  mBlockListView->setModel( mModel.blockStore() );
+  mView->setModel( mModel.blockStore() );
 
   connect( mBlockListView->selectionModel(),
     SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ),
     SLOT( slotCurrentChanged( const QModelIndex &, const QModelIndex & ) ) );
 
-  load();
-
-  mBlockListView->selectionModel()->setCurrentIndex( mBlockStore.index( 0 ),
+  mBlockListView->selectionModel()->setCurrentIndex(
+    mModel.blockStore()->index( 0 ),
     QItemSelectionModel::SelectCurrent );
 
   connect( mTitleEdit, SIGNAL( textEdited( const QString & ) ),
@@ -97,7 +99,7 @@ MainWindow::~MainWindow()
 void MainWindow::showRingView()
 {
   RingWidget *ringWidget = new RingWidget( 0 );
-  ringWidget->setModel( &mBlockStore );
+  ringWidget->setModel( mModel.blockStore() );
   ringWidget->show();
 }
 
@@ -105,10 +107,10 @@ void MainWindow::addBlock()
 {
   qDebug() << "MainWindow::addBlock()";
   
-  mBlockStore.add( new Block() );
+  mModel.blockStore()->add( new Block() );
 
   mBlockListView->selectionModel()->setCurrentIndex(
-    mBlockStore.index( mBlockStore.blocks().size() - 1 ),
+    mModel.blockStore()->index( mModel.blockStore()->blocks().size() - 1 ),
     QItemSelectionModel::SelectCurrent );
 }
 
@@ -119,7 +121,7 @@ void MainWindow::slotCurrentChanged( const QModelIndex &current,
   
   mCurrentBlockIndex = current;
 
-  loadBlockEditor( mBlockStore.block( mCurrentBlockIndex ) );
+  loadBlockEditor( mModel.blockStore()->block( mCurrentBlockIndex ) );
 }
 
 void MainWindow::loadBlockEditor( Block *block )
@@ -166,8 +168,8 @@ void MainWindow::loadBlockEditor( Block *block )
 void MainWindow::saveBlockEditor()
 {
   if ( mCurrentBlockIndex.isValid() ) {
-    saveBlockEditor( mBlockStore.block( mCurrentBlockIndex ) );
-    mBlockStore.updateBlock( mCurrentBlockIndex );
+    saveBlockEditor( mModel.blockStore()->block( mCurrentBlockIndex ) );
+    mModel.blockStore()->updateBlock( mCurrentBlockIndex );
   }
 }
 
@@ -210,13 +212,13 @@ void MainWindow::save()
 {
 //  qDebug() << "MainWindow::save()";
 
-  Storage s( &mBlockStore );
+  Storage s( &mModel );
   s.save( defaultFilename() );
 }
 
 void MainWindow::load()
 {
-  Storage s( &mBlockStore );
+  Storage s( &mModel );
   s.load( defaultFilename() );
 }
 

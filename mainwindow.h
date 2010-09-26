@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "blockstore.h"
+#include "model.h"
 
 #include <QMainWindow>
 #include <ui_mainwindow.h>
@@ -37,7 +37,7 @@ class MainWindow : public QMainWindow, private Ui_MainWindow
     void selectColor();
 
   private:
-    BlockStore mBlockStore;
+    Model mModel;
     QModelIndex mCurrentBlockIndex;
     
     bool mLoading;

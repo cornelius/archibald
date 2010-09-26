@@ -39,6 +39,16 @@ BlockStore::~BlockStore()
   clear();
 }
 
+void BlockStore::setTitle( const QString &title )
+{
+  mTitle = title;
+}
+
+QString BlockStore::title() const
+{
+  return mTitle;
+}
+
 Block::List BlockStore::blocks() const
 {
   return mBlocks;

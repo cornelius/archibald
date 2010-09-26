@@ -1,7 +1,7 @@
 /*
     This file is part of KDE.
 
-    Copyright (c) 2006 Cornelius Schumacher <schumacher@kde.org>
+    Copyright (c) 2006,2010 Cornelius Schumacher <schumacher@kde.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,8 +20,7 @@
 
 #include "storage.h"
 
-#include "blockstore.h"
-#include "block.h"
+#include "model.h"
 
 #include <Qt>
 #include <QFile>
@@ -32,16 +31,14 @@
 #include <QRegExp>
 #include <Q3StyleSheet>
 
-Storage::Storage( BlockStore *store )
-  : mStore( store )
+Storage::Storage( Model *model )
+  : mModel( model )
 {
 }
 
 void Storage::load( const QString &filename )
 {
 //  qDebug() << "Storage::load()";
-
-  mStore->clear();
 
   QFile file( filename );
   if ( !file.open( QFile::ReadOnly ) ) {
@@ -55,8 +52,8 @@ void Storage::load( const QString &filename )
     QDomNode n;
     for( n = element.firstChild(); !n.isNull(); n = n.nextSibling() ) {
       QDomElement e = n.toElement();
-      if ( e.tagName() == "block" ) {
-        parseBlock( e );
+      if ( e.tagName() == "diagram" ) {
+        parseDiagram( e );
       } else {
         qDebug() << "Unknown tag: " << e.tagName();
       }
@@ -64,7 +61,24 @@ void Storage::load( const QString &filename )
   }
 }
 
-void Storage::parseBlock( const QDomElement &element )
+void Storage::parseDiagram( const QDomElement &element )
+{
+  BlockStore *store = new BlockStore;
+
+  QDomNode n;
+  for( n = element.firstChild(); !n.isNull(); n = n.nextSibling() ) {
+    QDomElement e = n.toElement();
+    if ( e.tagName() == "block" ) {
+      store->add( parseBlock( e ) );
+    } else {
+      qDebug() << "Unknown tag: " << e.tagName();
+    }
+  }
+  
+  mModel->addBlockStore( store );
+}
+
+Block *Storage::parseBlock( const QDomElement &element )
 {
   Block *b = new Block;
 
@@ -110,7 +124,7 @@ void Storage::parseBlock( const QDomElement &element )
     }
   }
 
-  mStore->add( b );
+  return b;
 }
 
 void Storage::save( const QString &filename )
@@ -121,7 +135,7 @@ void Storage::save( const QString &filename )
   } else {
     QTextStream ts( &file );
     ts << "<archibald>\n";
-    Block::List blocks = mStore->blocks();
+    Block::List blocks = mModel->blockStore()->blocks();
     foreach( Block *b, blocks ) {
       ts << "  <block>\n";
       ts << "    <title>" + Q3StyleSheet:: escape( b->title() ) + "</title>\n";
