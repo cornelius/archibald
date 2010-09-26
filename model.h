@@ -32,6 +32,8 @@ class Model
 
     BlockStore *blockStore() const;
 
+    QList<BlockStore *> blockStores() const;
+
   private:
     QList<BlockStore *> mBlockStores;
 };

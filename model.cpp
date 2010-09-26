@@ -28,6 +28,11 @@ void Model::addBlockStore( BlockStore *store )
   mBlockStores.append( store );
 }
 
+QList<BlockStore *> Model::blockStores() const
+{
+  return mBlockStores;
+}
+
 BlockStore *Model::blockStore() const
 {
   return mBlockStores.first();

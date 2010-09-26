@@ -220,6 +220,8 @@ void MainWindow::load()
 {
   Storage s( &mModel );
   s.load( defaultFilename() );
+
+  mDiagramLabel->setText( mModel.blockStore()->title() );
 }
 
 QString MainWindow::defaultFilename() const

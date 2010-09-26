@@ -65,6 +65,8 @@ void Storage::parseDiagram( const QDomElement &element )
 {
   BlockStore *store = new BlockStore;
 
+  store->setTitle( element.attribute( "title" ) );
+
   QDomNode n;
   for( n = element.firstChild(); !n.isNull(); n = n.nextSibling() ) {
     QDomElement e = n.toElement();
@@ -135,48 +137,52 @@ void Storage::save( const QString &filename )
   } else {
     QTextStream ts( &file );
     ts << "<archibald>\n";
-    Block::List blocks = mModel->blockStore()->blocks();
-    foreach( Block *b, blocks ) {
-      ts << "  <block>\n";
-      ts << "    <title>" + Q3StyleSheet:: escape( b->title() ) + "</title>\n";
-      ts << "    <ring>" + QString::number( b->ring() ) + "</ring>\n";
-      ts << "    <startangle>" + QString::number( b->startAngle() ) +
-        "</startangle>\n";
-      ts << "    <endangle>" + QString::number( b->endAngle() ) +
-        "</endangle>\n";
-      ts << "    <color>" + b->color().name() + "</color>\n";
+    foreach( BlockStore *blockStore, mModel->blockStores() ) {
+      ts << "  <diagram title=\"" << blockStore->title() << "\">\n";
+      Block::List blocks = mModel->blockStore()->blocks();
+      foreach( Block *b, blocks ) {
+        ts << "    <block>\n";
+        ts << "      <title>" + Q3StyleSheet::escape( b->title() ) + "</title>\n";
+        ts << "      <ring>" + QString::number( b->ring() ) + "</ring>\n";
+        ts << "      <startangle>" + QString::number( b->startAngle() ) +
+          "</startangle>\n";
+        ts << "      <endangle>" + QString::number( b->endAngle() ) +
+          "</endangle>\n";
+        ts << "      <color>" + b->color().name() + "</color>\n";
 
-      ts << "    <hidetext>";
-      if ( b->hideText() ) ts << "true";
-      else ts << "false";
-      ts << "</hidetext>\n";
+        ts << "      <hidetext>";
+        if ( b->hideText() ) ts << "true";
+        else ts << "false";
+        ts << "</hidetext>\n";
 
-      ts << "    <pie>";
-      if ( b->pie() ) ts << "true";
-      else ts << "false";
-      ts << "</pie>\n";
+        ts << "      <pie>";
+        if ( b->pie() ) ts << "true";
+        else ts << "false";
+        ts << "</pie>\n";
 
-      ts << "    <circle>";
-      if ( b->circle() ) ts << "true";
-      else ts << "false";
-      ts << "</circle>\n";
+        ts << "      <circle>";
+        if ( b->circle() ) ts << "true";
+        else ts << "false";
+        ts << "</circle>\n";
 
-      if ( b->line().isEnabled() ) {
-        ts << "    <line";
-        ts << " destination=\"" << b->line().to() << "\"";
-        ts << " style=\"" << b->line().style() << "\"";
-        ts << "/>\n";
+        if ( b->line().isEnabled() ) {
+          ts << "      <line";
+          ts << " destination=\"" << b->line().to() << "\"";
+          ts << " style=\"" << b->line().style() << "\"";
+          ts << "/>\n";
+        }
+
+        if ( b->secondaryLine().isEnabled() ) {
+          ts << "      <secondaryline";
+          ts << " destination=\"" << b->secondaryLine().to() << "\"";
+          ts << " from=\"" << b->secondaryLine().from() << "\"";
+          ts << " style=\"" << b->secondaryLine().style() << "\"";
+          ts << "/>\n";
+        }
+
+        ts << "    </block>\n";
       }
-  
-      if ( b->secondaryLine().isEnabled() ) {
-        ts << "    <secondaryline";
-        ts << " destination=\"" << b->secondaryLine().to() << "\"";
-        ts << " from=\"" << b->secondaryLine().from() << "\"";
-        ts << " style=\"" << b->secondaryLine().style() << "\"";
-        ts << "/>\n";
-      }
-  
-      ts << "  </block>\n";
+      ts << "  </diagram>\n";
     }
     ts << "</archibald>\n";
   }
