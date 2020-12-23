@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET += 
+TARGET +=
 DEPENDPATH += .
 INCLUDEPATH += .
 
@@ -13,7 +13,6 @@ FORMS += mainwindow.ui
 SOURCES += main.cpp mainwindow.cpp ringwidget.cpp blockstore.cpp block.cpp \
   storage.cpp prefs.cpp line.cpp model.cpp
 
-QT += xml
-QT += qt3support
+QT += xml widgets
 
 VERSION = -0.1

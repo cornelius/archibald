@@ -13,7 +13,7 @@ MainWindow::MainWindow()
   : mLoading( false )
 {
   setupUi( this );
-  
+
   connect( mActionQuit, SIGNAL( triggered() ), SLOT( close() ) );
   connect( mCloseButton, SIGNAL( clicked() ), SLOT( close() ) );
 
@@ -81,7 +81,7 @@ MainWindow::MainWindow()
   QRect g = Prefs::self()->mainWindowGeometry();
   if ( g.isValid() ) setGeometry( g );
 
-  setCaption( "Archibald" );
+  setWindowTitle( "Archibald" );
 }
 
 MainWindow::~MainWindow()
@@ -105,7 +105,7 @@ void MainWindow::showRingView()
 void MainWindow::addBlock()
 {
   qDebug() << "MainWindow::addBlock()";
-  
+
   mModel.blockStore()->add( new Block() );
 
   mBlockListView->selectionModel()->setCurrentIndex(
@@ -117,7 +117,7 @@ void MainWindow::slotCurrentChanged( const QModelIndex &current,
   const QModelIndex &previous )
 {
   Q_UNUSED( previous )
-  
+
   mCurrentBlockIndex = current;
 
   loadBlockEditor( mModel.blockStore()->block( mCurrentBlockIndex ) );
@@ -225,7 +225,7 @@ void MainWindow::showDiagram( BlockStore *blockStore )
 {
   mModel.setCurrent( blockStore );
 
-  mDiagramLabel->setText( mModel.blockStore()->title() );  
+  mDiagramLabel->setText( mModel.blockStore()->title() );
 
   mBlockListView->setModel( mModel.blockStore() );
   mView->setModel( mModel.blockStore() );
@@ -247,7 +247,7 @@ QString MainWindow::defaultFilename() const
 void MainWindow::selectColor()
 {
   QColor newColor = QColorDialog::getColor( blockColor(), this );
-  
+
   setColor( newColor );
 }
 
@@ -289,7 +289,7 @@ void MainWindow::selectDiagram()
   }
   QString title = QInputDialog::getItem( this, "Select Diagram",
     "Select diagram to show", titles );
-    
+
   foreach( BlockStore *b, mModel.blockStores() ) {
     if ( b->title() == title ) {
       showDiagram( b );

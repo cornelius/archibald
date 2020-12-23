@@ -7,12 +7,12 @@
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
     (at your option) any later version.
-    
+
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU General Public License for more details.
-    
+
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -29,7 +29,6 @@
 #include <QDomDocument>
 #include <QDebug>
 #include <QRegExp>
-#include <Q3StyleSheet>
 
 Storage::Storage( Model *model )
   : mModel( model )
@@ -46,7 +45,7 @@ void Storage::load( const QString &filename )
   } else {
     QDomDocument doc;
     doc.setContent( &file );
-    
+
     QDomElement element = doc.documentElement();
 
     QDomNode n;
@@ -76,7 +75,7 @@ void Storage::parseDiagram( const QDomElement &element )
       qDebug() << "Unknown tag: " << e.tagName();
     }
   }
-  
+
   mModel->addBlockStore( store );
 }
 
@@ -142,7 +141,7 @@ void Storage::save( const QString &filename )
       Block::List blocks = blockStore->blocks();
       foreach( Block *b, blocks ) {
         ts << "    <block>\n";
-        ts << "      <title>" + Q3StyleSheet::escape( b->title() ) + "</title>\n";
+        ts << "      <title>" + b->title().toHtmlEscaped() + "</title>\n";
         ts << "      <ring>" + QString::number( b->ring() ) + "</ring>\n";
         ts << "      <startangle>" + QString::number( b->startAngle() ) +
           "</startangle>\n";
