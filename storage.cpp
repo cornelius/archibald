@@ -28,7 +28,6 @@
 #include <QTextStream>
 #include <QDomDocument>
 #include <QDebug>
-#include <QRegExp>
 
 Storage::Storage( Model *model )
   : mModel( model )
